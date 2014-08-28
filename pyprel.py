@@ -4,7 +4,7 @@
 #                                                                              #
 ################################################################################
 #                                                                              #
-# version: 2014-08-12T1640                                                     #
+# version: 2014-08-28T1746                                                     #
 #                                                                              #
 ################################################################################
 #                                                                              #
@@ -31,6 +31,15 @@
 # <http://www.gnu.org/licenses/>.                                              #
 #                                                                              #
 ################################################################################
+
+import subprocess
+
+def printLine(character = '-'):
+    terminalWidth = int(subprocess.Popen(['tput', 'cols'], stdout = subprocess.PIPE).communicate()[0].strip('\n'))
+    line = ""
+    for column in range(0, terminalWidth):
+        line += character
+    print(line)
 
 def printDictionary(
     dictionary = None,

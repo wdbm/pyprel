@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pyprel as pyprel
 
 def main():
@@ -16,8 +18,10 @@ def main():
             }
         }
     }
+
+    pyprel.printLine()
     pyprel.printDictionary(dictionary = information)
+    pyprel.printLine()
 
 if __name__ == '__main__':
-
     main()
