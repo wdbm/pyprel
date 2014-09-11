@@ -1,4 +1,3 @@
-pyprel
-======
+# pyprel
 
 Python print elegant
