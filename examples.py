@@ -23,5 +23,15 @@ def main():
     pyprel.printDictionary(dictionary = information)
     pyprel.printLine()
 
+    text = (
+    "   ____      _            _____ _                \n"
+    "  / ___|___ | | ___  _ __|  ___| | _____      __ \n"
+    " | |   / _ \| |/ _ \| '__| |_  | |/ _ \ \ /\ / / \n"
+    " | |__| (_) | | (_) | |  |  _| | | (_) \ V  V /  \n"
+    "  \____\___/|_|\___/|_|  |_|   |_|\___/ \_/\_/   "
+    )
+
+    pyprel.printCenter(text = text)
+
 if __name__ == '__main__':
     main()

@@ -4,7 +4,7 @@
 #                                                                              #
 ################################################################################
 #                                                                              #
-# version: 2014-08-28T1746                                                     #
+# version: 2014-10-27T1920Z                                                    #
 #                                                                              #
 ################################################################################
 #                                                                              #
@@ -24,7 +24,7 @@
 #                                                                              #
 # This program is distributed in the hope that it will be useful, but WITHOUT  #
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or        #
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for    #
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for     #
 # more details.                                                                #
 #                                                                              #
 # For a copy of the GNU General Public License, see                            #
@@ -34,12 +34,27 @@
 
 import subprocess
 
-def printLine(character = '-'):
-    terminalWidth = int(subprocess.Popen(['tput', 'cols'], stdout = subprocess.PIPE).communicate()[0].strip('\n'))
-    line = ""
-    for column in range(0, terminalWidth):
-        line += character
-    print(line)
+def centerString(
+    text = None
+    ):
+    textList = text.splitlines()
+    terminalWidth = int(subprocess.Popen(
+        ['tput', 'cols'],
+        stdout = subprocess.PIPE
+        ).communicate()[0].strip('\n'))
+    newText = ""
+    for line in textList:
+        widthOfText = len(line)
+        paddingTotal = terminalWidth - widthOfText
+        paddingLeft = int(paddingTotal/2)
+        paddingRight = paddingTotal - paddingLeft
+        newText = newText + paddingLeft * " " + line + paddingRight * " " + "\n"
+    return(newText)
+
+def printCenter(
+    text = None
+    ):
+    print(centerString(text = text))
 
 def printDictionary(
     dictionary = None,
@@ -60,3 +75,13 @@ def printDictionary(
                 key = key,
                 value = value
             ))
+
+def printLine(character = '-'):
+    terminalWidth = int(subprocess.Popen(
+        ['tput', 'cols'],
+        stdout = subprocess.PIPE
+        ).communicate()[0].strip('\n'))
+    line = ""
+    for column in range(0, terminalWidth):
+        line += character
+    print(line)
