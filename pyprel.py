@@ -4,7 +4,7 @@
 #                                                                              #
 ################################################################################
 #                                                                              #
-# version: 2014-10-27T1920Z                                                    #
+# version: 2014-11-13T1056Z                                                    #
 #                                                                              #
 ################################################################################
 #                                                                              #
@@ -33,6 +33,7 @@
 ################################################################################
 
 import subprocess
+import pyfiglet as pyfiglet
 
 def centerString(
     text = None
@@ -76,7 +77,9 @@ def printDictionary(
                 value = value
             ))
 
-def printLine(character = '-'):
+def printLine(
+    character = '-'
+    ):
     terminalWidth = int(subprocess.Popen(
         ['tput', 'cols'],
         stdout = subprocess.PIPE
@@ -85,3 +88,9 @@ def printLine(character = '-'):
     for column in range(0, terminalWidth):
         line += character
     print(line)
+
+def renderBanner(
+    text = None,
+    font = "slant"
+    ):
+    return(pyfiglet.Figlet(font = font).renderText(text))
