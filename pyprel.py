@@ -4,10 +4,6 @@
 #                                                                              #
 ################################################################################
 #                                                                              #
-# version: 2014-11-13T1056Z                                                    #
-#                                                                              #
-################################################################################
-#                                                                              #
 # LICENCE INFORMATION                                                          #
 #                                                                              #
 # This program provides elegant printing utilities in Python.                  #
@@ -31,6 +27,8 @@
 # <http://www.gnu.org/licenses/>.                                              #
 #                                                                              #
 ################################################################################
+
+version = "2014-11-13T1056Z"
 
 import subprocess
 import pyfiglet as pyfiglet
