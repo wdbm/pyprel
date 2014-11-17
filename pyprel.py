@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2014-11-17T1958Z"
+version = "2014-11-17T2008Z"
 
 import subprocess
 import pyfiglet as pyfiglet
@@ -38,8 +38,10 @@ def centerString(
     ):
     textList = text.splitlines()
     terminalWidth = int(
-        subprocess.Popen(['tput', 'cols'],
-        stdout = subprocess.PIPE).communicate()[0].decode('utf-8').strip('\n')
+        subprocess.Popen(
+            ['tput', 'cols'],
+            stdout = subprocess.PIPE
+        ).communicate()[0].decode('utf-8').strip('\n')
     )
     newText = ""
     for line in textList:
@@ -78,10 +80,12 @@ def printDictionary(
 def printLine(
     character = '-'
     ):
-    terminalWidth = int(subprocess.Popen(
-        ['tput', 'cols'],
-        stdout = subprocess.PIPE
-        ).communicate()[0].strip('\n'))
+    terminalWidth = int(
+        subprocess.Popen(
+            ['tput', 'cols'],
+            stdout = subprocess.PIPE
+        ).communicate()[0].decode('utf-8').strip('\n')
+    )
     line = ""
     for column in range(0, terminalWidth):
         line += character
