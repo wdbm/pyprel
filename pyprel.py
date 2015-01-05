@@ -28,10 +28,10 @@
 #                                                                              #
 ################################################################################
 
-version = "2014-11-17T2008Z"
+version = "2015-01-05T1640Z"
 
 import subprocess
-import pyfiglet as pyfiglet
+import pyfiglet
 
 def centerString(
     text = None
@@ -39,9 +39,9 @@ def centerString(
     textList = text.splitlines()
     terminalWidth = int(
         subprocess.Popen(
-            ['tput', 'cols'],
+            ["tput", "cols"],
             stdout = subprocess.PIPE
-        ).communicate()[0].decode('utf-8').strip('\n')
+        ).communicate()[0].decode("utf-8").strip("\n")
     )
     newText = ""
     for line in textList:
@@ -57,39 +57,57 @@ def printCenter(
     ):
     print(centerString(text = text))
 
-def printDictionary(
-    dictionary = None,
-    indentation = ''
+def dictionaryString(
+    dictionary  = None,
+    indentation = ""
     ):
+    string = ""
     for key, value in dictionary.iteritems():
         if isinstance(value, dict):
-            print("{indentation}{key}:".format(
-            indentation = indentation,
-            key = key
-        ))
-            printDictionary(
-                dictionary = value,
-                indentation = indentation + '   '
+            string += "\n{indentation}{key}:".format(
+                indentation = indentation,
+                key         = key
+            )
+            string += dictionaryString(
+                dictionary  = value,
+                indentation = indentation + "  "
             )
         else:
-            print(indentation + "{key}: {value}".format(
-                key = key,
+            string += "\n" + indentation + "{key}: {value}".format(
+                key   = key,
                 value = value
-            ))
+            )
+    return(string)
 
-def printLine(
-    character = '-'
+def printDictionary(
+    dictionary  = None,
+    indentation = ""
+    ):
+    print(dictionaryString(
+        dictionary  = dictionary,
+        indentation = ""
+    ))
+
+def lineString(
+    character = "-"
     ):
     terminalWidth = int(
         subprocess.Popen(
-            ['tput', 'cols'],
+            ["tput", "cols"],
             stdout = subprocess.PIPE
-        ).communicate()[0].decode('utf-8').strip('\n')
+        ).communicate()[0].decode("utf-8").strip("\n")
     )
     line = ""
     for column in range(0, terminalWidth):
         line += character
-    print(line)
+    return(line)
+
+def printLine(
+    character = "-"
+    ):
+    print(lineString(
+        character = character
+    ))
 
 def renderBanner(
     text = None,

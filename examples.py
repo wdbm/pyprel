@@ -22,6 +22,8 @@ def main():
     pyprel.printLine()
     pyprel.printDictionary(dictionary = information)
     pyprel.printLine()
+    print(pyprel.dictionaryString(dictionary = information))
+    pyprel.printLine()
 
     text = (
     "   ____      _            _____ _                \n"
