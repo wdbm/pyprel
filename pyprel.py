@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-01-05T1640Z"
+version = "2015-02-14T1725Z"
 
 import subprocess
 import pyfiglet
@@ -114,3 +114,34 @@ def renderBanner(
     font = "slant"
     ):
     return(pyfiglet.Figlet(font = font).renderText(text))
+
+def renderSegmentDisplay(
+    text = None
+    ):
+    segments = (
+        {
+            ' _ ': '02356789',
+            '   ': '14'
+        },
+        {
+            '| |': '0',
+            '  |': '17',
+            ' _|': '23',
+            '|_|': '489',
+            '|_ ': '56'
+        },
+        {
+            '|_|': '068',
+            '  |':'147',
+            '|_ ': '2',
+            ' _|':'359'
+        }
+    )
+    segmentDisplayRender = ""
+    for row in range(3):
+        for character in text:
+            for leds, digits in segments[row].items():
+                if character in digits:
+                    segmentDisplayRender = segmentDisplayRender + leds
+        segmentDisplayRender = segmentDisplayRender + "\n"
+    return(segmentDisplayRender)

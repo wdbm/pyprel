@@ -4,6 +4,9 @@ import pyprel as pyprel
 
 def main():
 
+    print("\nexample: printout of dictionary")
+    raw_input("Press Enter to continue.")
+
     information = {
         "sample information": {
             "ID": 169888,
@@ -25,6 +28,9 @@ def main():
     print(pyprel.dictionaryString(dictionary = information))
     pyprel.printLine()
 
+    print("\nexample: printout of existing logo")
+    raw_input("Press Enter to continue.")
+
     text = (
     "   ____      _            _____ _                \n"
     "  / ___|___ | | ___  _ __|  ___| | _____      __ \n"
@@ -34,6 +40,22 @@ def main():
     )
 
     pyprel.printCenter(text = text)
+
+    print("\nexample: rendering and printout of logo")
+    raw_input("Press Enter to continue.")
+
+    name = "aria"
+    logo = pyprel.renderBanner(
+        text = name.upper()
+    )
+    pyprel.printLine()
+    print(pyprel.centerString(text = logo))
+    pyprel.printLine()
+
+    print("\nexample: rendering and printout segment display")
+    raw_input("Press Enter to continue.")
+
+    print(pyprel.renderSegmentDisplay(text = "0123456789"))
 
 if __name__ == '__main__':
     main()
