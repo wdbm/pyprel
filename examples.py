@@ -57,5 +57,66 @@ def main():
 
     print(pyprel.renderSegmentDisplay(text = "0123456789"))
 
+    print("\nexample: printout of tables")
+    raw_input("Press Enter to continue.")
+
+    tableContents = [
+        ["heading 1", "heading 2"],
+        ["some text", "some more text"],
+        ["lots and lots and lots and lots and lots of text", "some more text"]
+    ]
+    print(
+        pyprel.Table(
+            contents = tableContents,
+            columnWidth = 25
+        )
+    )
+    print(
+        pyprel.Table(
+            contents = tableContents,
+            tableWidthRequested = 30
+        )
+    )
+    print(
+        pyprel.Table(
+            contents = tableContents,
+            tableWidthRequested = 30,
+            hardWrapping = True
+        )
+    )
+    print(
+        pyprel.Table(
+            contents = tableContents
+        )
+    )
+    pyprel.printCenter(
+        text = pyprel.Table(
+            contents = tableContents,
+            tableWidthRequested = 30
+        ).__str__()
+    )
+    #tableContents = [
+    #    [
+    #        "heading 1",
+    #        "heading 2",
+    #        "heading 3"
+    #    ],
+    #    [
+    #        "some text",
+    #        "some more text",
+    #        "even more text"
+    #    ],
+    #    [
+    #        "lots and lots and lots and lots and lots of text",
+    #        "some more text",
+    #        "some more text"
+    #    ]
+    #]
+    #print(
+    #    pyprel.Table(
+    #        contents = tableContents
+    #    )
+    #)
+
 if __name__ == '__main__':
     main()

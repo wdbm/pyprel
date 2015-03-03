@@ -37,6 +37,34 @@ It can center blocks of text for terminal output (such as in a way shown for the
 |_|  ||_  _|  | _||_|  ||_| _|
 ```
 
+It can render and display tables:
+
+```
+|---------------------------------------------------|
+|heading 1                |heading 2                |
+|---------------------------------------------------|
+|some text                |some more text           |
+|---------------------------------------------------|
+|lots and lots and lots   |some more text           |
+|and lots and lots of text|                         |
+|---------------------------------------------------|
+```
+
+```
+                         |---------------------------|                          
+                         |heading 1    |heading 2    |                          
+                         |---------------------------|                          
+                         |some text    |some more    |                          
+                         |             |text         |                          
+                         |---------------------------|                          
+                         |lots and lots|some more    |                          
+                         |and lots and |text         |                          
+                         |lots and lots|             |                          
+                         |of text      |             |                          
+                         |---------------------------|                         
+```
+
+
 # prerequisites
 
 ## pyfiglet

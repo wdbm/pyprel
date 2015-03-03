@@ -28,25 +28,31 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-02-14T1725Z"
+version = "2015-03-03T1439Z"
 
 import subprocess
+import textwrap
 import pyfiglet
+
+def terminalWidth():
+    return(
+        int(
+            subprocess.Popen(
+                ["tput", "cols"],
+                stdout = subprocess.PIPE
+            ).communicate()[0].decode("utf-8").strip("\n")
+        )
+    )
 
 def centerString(
     text = None
     ):
     textList = text.splitlines()
-    terminalWidth = int(
-        subprocess.Popen(
-            ["tput", "cols"],
-            stdout = subprocess.PIPE
-        ).communicate()[0].decode("utf-8").strip("\n")
-    )
+    _terminalWidth = terminalWidth()
     newText = ""
     for line in textList:
         widthOfText = len(line)
-        paddingTotal = terminalWidth - widthOfText
+        paddingTotal = _terminalWidth - widthOfText
         paddingLeft = int(paddingTotal/2)
         paddingRight = paddingTotal - paddingLeft
         newText = newText + paddingLeft * " " + line + paddingRight * " " + "\n"
@@ -91,14 +97,9 @@ def printDictionary(
 def lineString(
     character = "-"
     ):
-    terminalWidth = int(
-        subprocess.Popen(
-            ["tput", "cols"],
-            stdout = subprocess.PIPE
-        ).communicate()[0].decode("utf-8").strip("\n")
-    )
+    _terminalWidth = terminalWidth()
     line = ""
-    for column in range(0, terminalWidth):
+    for column in range(0, _terminalWidth):
         line += character
     return(line)
 
@@ -145,3 +146,87 @@ def renderSegmentDisplay(
                     segmentDisplayRender = segmentDisplayRender + leds
         segmentDisplayRender = segmentDisplayRender + "\n"
     return(segmentDisplayRender)
+
+class Table:
+
+    def __init__(
+        self,
+        contents                 = None,
+        columnWidth              = None,
+        tableWidthRequested      = None,
+        hardWrapping             = False,
+        columnDelimiter          = "|",
+        rowDelimiter             = "-"
+        ):
+        self.contents            = contents
+        self.columnWidth         = columnWidth
+        self.tableWidthRequested = tableWidthRequested
+        self.columnDelimiter     = columnDelimiter
+        self.hardWrapping        = hardWrapping
+        # Resolve the table dimensions.
+        # If a column width is specified, that is given precidence. If a table
+        # width is requested, a reasonable column width is derived from it. If
+        # no column width is specified and no table width is requested, the
+        # requested table width is set to the terminal width.
+        if self.columnWidth is None:
+            if self.tableWidthRequested is None:
+                self.tableWidthRequested = terminalWidth()
+            numberOfColumns = len(contents[0])
+            self.columnWidth = (
+                self.tableWidthRequested -\
+                (numberOfColumns + 1) * len(self.columnDelimiter)
+            ) / numberOfColumns
+        # line gets too long for one concatenation
+        self.rowDelimiter = self.columnDelimiter
+        self.rowDelimiter +=\
+            rowDelimiter * (
+                self.columnWidth * max([len(i) for i in self.contents]) + 1
+            )
+        self.rowDelimiter +=\
+            self.columnDelimiter + "\n"
+
+    def wrapSoft(self):
+        # Wrap text regarding word boundaries.
+        tableString = self.rowDelimiter
+        # Restructure the table contents to get soft wrapped content for each
+        # cell.
+        contentsWrapped = [
+            [
+                textwrap.wrap(column, self.columnWidth) for column in row
+            ] for row in self.contents
+        ]
+        for row in contentsWrapped:
+            for n in range(max([len(i) for i in row])):
+                tableString += self.columnDelimiter
+                for column in row:
+                    if n < len(column):
+                        tableString += column[n].ljust(self.columnWidth)
+                    else:
+                        tableString += " " * self.columnWidth
+                    tableString += self.columnDelimiter
+                tableString += "\n"
+            tableString += self.rowDelimiter
+        return(tableString)
+
+    def wrapHard(self):
+        # Wrap text disregarding word boundaries.
+        tableString = self.rowDelimiter
+        for row in self.contents:
+            maxWrap = (max([len(i) for i in row]) // self.columnWidth) + 1
+            for r in range(maxWrap):
+                tableString += self.columnDelimiter
+                for column in row:
+                    start = r * self.columnWidth
+                    end = (r + 1) * self.columnWidth 
+                    tableString +=\
+                        column[start:end].ljust(self.columnWidth) +\
+                        self.columnDelimiter
+                tableString += "\n"
+            tableString += self.rowDelimiter
+        return(tableString)
+
+    def __str__(self):
+        if self.hardWrapping is True:
+            return self.wrapHard()
+        else:
+            return self.wrapSoft()
