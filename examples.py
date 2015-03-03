@@ -95,28 +95,53 @@ def main():
             tableWidthRequested = 30
         ).__str__()
     )
-    #tableContents = [
-    #    [
-    #        "heading 1",
-    #        "heading 2",
-    #        "heading 3"
-    #    ],
-    #    [
-    #        "some text",
-    #        "some more text",
-    #        "even more text"
-    #    ],
-    #    [
-    #        "lots and lots and lots and lots and lots of text",
-    #        "some more text",
-    #        "some more text"
-    #    ]
-    #]
-    #print(
-    #    pyprel.Table(
-    #        contents = tableContents
-    #    )
-    #)
+    tableContents = [
+        [
+            "heading 1",
+            "heading 2",
+            "heading 3"
+        ],
+        [
+            "some text",
+            "some more text",
+            "even more text"
+        ],
+        [
+            "lots and lots and lots and lots and lots of text",
+            "some more text",
+            "some more text"
+        ]
+    ]
+    print(
+        pyprel.Table(
+            contents = tableContents
+        )
+    )
+    tableContents = [
+        [
+            "heading 1",
+            "heading 2",
+            "heading 3",
+            "heading 4"
+        ],
+        [
+            "some text",
+            "some more text",
+            "even more text",
+            "yeah more text"
+        ],
+        [
+            "lots and lots and lots and lots and lots of text",
+            "some more text",
+            "some more text",
+            "some more text"
+        ]
+    ]
+    print(
+        pyprel.Table(
+            contents = tableContents
+        )
+    )
 
 if __name__ == '__main__':
     main()

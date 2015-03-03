@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-03-03T1439Z"
+version = "2015-03-03T1505Z"
 
 import subprocess
 import textwrap
@@ -163,6 +163,7 @@ class Table:
         self.tableWidthRequested = tableWidthRequested
         self.columnDelimiter     = columnDelimiter
         self.hardWrapping        = hardWrapping
+        self.numberOfColumns = len(contents[0])
         # Resolve the table dimensions.
         # If a column width is specified, that is given precidence. If a table
         # width is requested, a reasonable column width is derived from it. If
@@ -171,16 +172,16 @@ class Table:
         if self.columnWidth is None:
             if self.tableWidthRequested is None:
                 self.tableWidthRequested = terminalWidth()
-            numberOfColumns = len(contents[0])
             self.columnWidth = (
                 self.tableWidthRequested -\
-                (numberOfColumns + 1) * len(self.columnDelimiter)
-            ) / numberOfColumns
+                (self.numberOfColumns + 1) * len(self.columnDelimiter)
+            ) / self.numberOfColumns
         # line gets too long for one concatenation
         self.rowDelimiter = self.columnDelimiter
         self.rowDelimiter +=\
             rowDelimiter * (
-                self.columnWidth * max([len(i) for i in self.contents]) + 1
+                self.columnWidth * max([len(i) for i in self.contents]) +\
+                (self.numberOfColumns - 1)
             )
         self.rowDelimiter +=\
             self.columnDelimiter + "\n"
