@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-03-03T1505Z"
+version = "2015-03-03T1703Z"
 
 import subprocess
 import textwrap
@@ -181,7 +181,7 @@ class Table:
         self.rowDelimiter +=\
             rowDelimiter * (
                 self.columnWidth * max([len(i) for i in self.contents]) +\
-                (self.numberOfColumns - 1)
+                (self.numberOfColumns - 1) * len(self.columnDelimiter)
             )
         self.rowDelimiter +=\
             self.columnDelimiter + "\n"

@@ -37,7 +37,7 @@ It can center blocks of text for terminal output (such as in a way shown for the
 |_|  ||_  _|  | _||_|  ||_| _|
 ```
 
-It can render and display tables:
+It can render and display tables of various specified widths and column widths with various text wrapping features and delimiters:
 
 ```
 |---------------------------------------------------|
@@ -62,6 +62,17 @@ It can render and display tables:
                          |lots and lots|             |                          
                          |of text      |             |                          
                          |---------------------------|                         
+```
+
+```
+||----------------------------------------------------||
+||heading 1                ||heading 2                ||
+||----------------------------------------------------||
+||some text                ||some more text           ||
+||----------------------------------------------------||
+||lots and lots and lots   ||some more text           ||
+||and lots and lots of text||                         ||
+||----------------------------------------------------||
 ```
 
 ```
@@ -91,4 +102,6 @@ It can render and display tables:
 
 ## pyfiglet
 
-    sudo pip install pyfiglet
+```Bash
+sudo pip install pyfiglet
+```

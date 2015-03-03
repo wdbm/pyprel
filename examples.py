@@ -95,6 +95,20 @@ def main():
             tableWidthRequested = 30
         ).__str__()
     )
+    print(
+        pyprel.Table(
+            contents = tableContents,
+            columnWidth = 25,
+            columnDelimiter = "||"
+        )
+    )
+    print(
+        pyprel.Table(
+            contents = tableContents,
+            columnWidth = 25,
+            rowDelimiter = "~"
+        )
+    )
     tableContents = [
         [
             "heading 1",
