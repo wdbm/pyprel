@@ -28,11 +28,35 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-03-03T1703Z"
+version = "2015-03-04T1413Z"
 
 import subprocess
 import textwrap
-import pyfiglet
+
+def smuggle(
+    moduleName = None,
+    URL        = None
+    ):
+    if moduleName is None:
+        moduleName = URL
+    try:
+        module = __import__(moduleName)
+        return(module)
+    except:
+        try:
+            moduleString = urllib.urlopen(URL).read()
+            module = imp.new_module("module")
+            exec moduleString in module.__dict__
+            return(module)
+        except: 
+            raise(
+                Exception(
+                    "module {moduleName} import error".format(
+                        moduleName = moduleName
+                    )
+                )
+            )
+            sys.exit()
 
 def terminalWidth():
     return(
@@ -114,6 +138,7 @@ def renderBanner(
     text = None,
     font = "slant"
     ):
+    pyfiglet = smuggle(moduleName = "pyfiglet")
     return(pyfiglet.Figlet(font = font).renderText(text))
 
 def renderSegmentDisplay(
