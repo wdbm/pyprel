@@ -8,7 +8,7 @@
 #                                                                              #
 # This program provides elegant printing utilities in Python.                  #
 #                                                                              #
-# copyright (C) 2014 William Breaden Madden                                    #
+# copyright (C) 2014 2015 William Breaden Madden                               #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-03-04T1413Z"
+version = "2015-09-01T2046Z"
 
 import subprocess
 import textwrap
@@ -256,3 +256,153 @@ class Table:
             return self.wrapHard()
         else:
             return self.wrapSoft()
+
+def clamp(x): 
+    return(max(0, min(x, 255)))
+
+def RGB_to_HEX(RGB_tuple):
+    # This function returns a HEX string given an RGB tuple.
+    r = RGB_tuple[0]
+    g = RGB_tuple[1]
+    b = RGB_tuple[2]
+    return "#{0:02x}{1:02x}{2:02x}".format(clamp(r), clamp(g), clamp(b))
+
+def HEX_to_RGB(HEX_string):
+    # This function returns an RGB tuple given a HEX string.
+    HEX = HEX_string.lstrip('#')
+    HEX_length = len(HEX)
+    return tuple(
+        int(HEX[i:i + HEX_length // 3], 16) for i in range(
+            0,
+            HEX_length,
+            HEX_length // 3
+        )
+    )
+
+def mean_color(colorsInHEX):
+    # This function returns a HEX string that represents the mean color of a
+    # list of colors represented by HEX strings.
+    colorsInRGB = []
+    for colorInHEX in colorsInHEX:
+        colorsInRGB.append(HEX_to_RGB(colorInHEX))
+    sum_r = 0
+    sum_g = 0
+    sum_b = 0
+    for colorInRGB in colorsInRGB:
+        sum_r += colorInRGB[0]
+        sum_g += colorInRGB[1]
+        sum_b += colorInRGB[2]
+    mean_r = sum_r / len(colorsInRGB)
+    mean_g = sum_g / len(colorsInRGB)
+    mean_b = sum_b / len(colorsInRGB)
+    return RGB_to_HEX((mean_r, mean_g, mean_b))
+
+def extend_palette(
+    colors = None, # list of HEX string colors
+    minimumNumberOfColorsNeeded = 15
+    ):
+    while len(colors) < minimumNumberOfColorsNeeded:
+        for index in range(1, len(colors), 2):
+            colors.insert(index, mean_color([colors[index - 1], colors[index]]))
+    return colors
+
+def save_image_of_palette(
+    colors   = None, # list of HEX string colors
+    filename = "palette.png"
+    ):
+    import numpy
+    import Image
+    scale_x = 200
+    scale_y = 124
+    data = numpy.zeros((1, len(colors), 3), dtype = numpy.uint8)
+    index = -1
+    for color in colors:
+        index += 1
+        color_RGB = HEX_to_RGB(color)
+        data[0, index] = [color_RGB[0], color_RGB[1], color_RGB[2]]
+    data = numpy.repeat(data, scale_x, axis=0)
+    data = numpy.repeat(data, scale_y, axis=1)
+    image = Image.fromarray(data)
+    image.save(filename)
+
+# Define color palettes.
+# primary colors for white background
+palette1 = [
+    "#fc0000",
+    "#ffae3a",
+    "#00ac00",
+    "#6665ec",
+    "#a9a9a9",
+]
+# ATLAS clarity
+palette2 = [
+    "#FEFEFE",
+    "#AACCFF",
+    "#649800",
+    "#9A33CC",
+    "#EE2200",
+]
+# ATLAS primary colors
+palette3 = [
+    "#005CFF",
+    "#FFBF00",
+    "#14B814",
+    "#FF0000",
+    "#00FFFF",
+]
+# grayscale
+palette4 = [
+    "#E8E9EC",
+    "#A7AEB6",
+    "#6A747F",
+    "#383D43",
+    "#2A2C30",
+]
+# dusk
+palette5 = [
+    "#F1E1BD",
+    "#EEBA85",
+    "#E18D76",
+    "#9C837E",
+    "#5B7887",
+]
+# sunset
+palette6 = [
+    "#ED4964",
+    "#F69092",
+    "#CC3075",
+    "#5B217B",
+    "#441D54",
+]
+# burnt
+palette7 = [
+    "#000000",
+    "#472718",
+    "#EB5656",
+    "#ECA558",
+    "#F2D773",
+]
+# high contrast
+palette8 = [
+    "#140E11",
+    "#873387",
+    "#41C6D7",
+    "#ECD03E",
+    "#FEEAC6",
+]
+palettes = []
+palettes.append(palette1)
+palettes.append(palette2)
+palettes.append(palette3)
+palettes.append(palette4)
+palettes.append(palette5)
+palettes.append(palette6)
+palettes.append(palette7)
+palettes.append(palette8)
+
+def save_images_of_palettes():
+    for index, palette in enumerate(palettes):
+        save_image_of_palette(
+            colors = palette,
+            filename = "palette_{index}.png".format(index = index)
+        )

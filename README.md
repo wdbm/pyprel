@@ -98,6 +98,16 @@ It can render and display tables of various specified widths and column widths w
 |---------------------------------------------------------------------------|
 ```
 
+It can provide color palettes, extend them and save images of them:
+
+![](images/palette_1.png)
+![](images/palette_2.png)
+![](images/palette_3.png)
+![](images/palette_4.png)
+![](images/palette_5.png)
+![](images/palette_6.png)
+![](images/palette_7.png)
+
 # prerequisites
 
 ## pyfiglet
