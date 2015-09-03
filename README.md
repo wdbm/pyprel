@@ -107,6 +107,7 @@ It can provide color palettes, extend them and save images of them:
 ![](images/palette_5.png)
 ![](images/palette_6.png)
 ![](images/palette_7.png)
+![](images/palette_8.png)
 
 # prerequisites
 

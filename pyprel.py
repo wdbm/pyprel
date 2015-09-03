@@ -28,7 +28,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-09-01T2046Z"
+version = "2015-09-03T1620Z"
 
 import subprocess
 import textwrap
@@ -404,5 +404,5 @@ def save_images_of_palettes():
     for index, palette in enumerate(palettes):
         save_image_of_palette(
             colors = palette,
-            filename = "palette_{index}.png".format(index = index)
+            filename = "palette_{index}.png".format(index = index + 1)
         )
