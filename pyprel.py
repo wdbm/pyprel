@@ -26,9 +26,15 @@
 # For a copy of the GNU General Public License, see                            #
 # <http://www.gnu.org/licenses/>.                                              #
 #                                                                              #
+# REFERENCES                                                                   #
+#                                                                              #
+# - C. A. Brewer, M. Harrower ColorBrewer.org: An Online Tool for Selecting    #
+#   Colour Schemes for Maps, The Cartographic Journal, 40 (1), 27--37          #
+#   (01 June 2003)                                                             #
+#                                                                              #
 ################################################################################
 
-version = "2015-09-03T1620Z"
+version = "2015-09-08T1600Z"
 
 import subprocess
 import textwrap
@@ -297,6 +303,42 @@ def mean_color(colorsInHEX):
     mean_b = sum_b / len(colorsInRGB)
     return RGB_to_HEX((mean_r, mean_g, mean_b))
 
+class Palette(list):
+
+    def __init__(
+        self,
+        name        = None, # string name
+        description = None, # string description
+        colors      = None, # list of colors
+        *args
+        ):
+        super(Palette, self).__init__(*args)
+        self._name          = name
+        self._description   = description
+        self.extend(colors)
+
+    def name(
+        self
+        ):
+        return self._name
+
+    def set_name(
+        self,
+        name = None
+        ):
+        self._name = name
+
+    def description(
+        self
+        ):
+        return self._description
+
+    def set_description(
+        self,
+        description = None
+        ):
+        self._description = description
+
 def extend_palette(
     colors = None, # list of HEX string colors
     minimumNumberOfColorsNeeded = 15
@@ -326,79 +368,311 @@ def save_image_of_palette(
     image.save(filename)
 
 # Define color palettes.
-# primary colors for white background
-palette1 = [
-    "#fc0000",
-    "#ffae3a",
-    "#00ac00",
-    "#6665ec",
-    "#a9a9a9",
-]
-# ATLAS clarity
-palette2 = [
-    "#FEFEFE",
-    "#AACCFF",
-    "#649800",
-    "#9A33CC",
-    "#EE2200",
-]
-# ATLAS primary colors
-palette3 = [
-    "#005CFF",
-    "#FFBF00",
-    "#14B814",
-    "#FF0000",
-    "#00FFFF",
-]
-# grayscale
-palette4 = [
-    "#E8E9EC",
-    "#A7AEB6",
-    "#6A747F",
-    "#383D43",
-    "#2A2C30",
-]
-# dusk
-palette5 = [
-    "#F1E1BD",
-    "#EEBA85",
-    "#E18D76",
-    "#9C837E",
-    "#5B7887",
-]
-# sunset
-palette6 = [
-    "#ED4964",
-    "#F69092",
-    "#CC3075",
-    "#5B217B",
-    "#441D54",
-]
-# burnt
-palette7 = [
-    "#000000",
-    "#472718",
-    "#EB5656",
-    "#ECA558",
-    "#F2D773",
-]
-# high contrast
-palette8 = [
-    "#140E11",
-    "#873387",
-    "#41C6D7",
-    "#ECD03E",
-    "#FEEAC6",
-]
 palettes = []
-palettes.append(palette1)
-palettes.append(palette2)
-palettes.append(palette3)
-palettes.append(palette4)
-palettes.append(palette5)
-palettes.append(palette6)
-palettes.append(palette7)
-palettes.append(palette8)
+palettes.append(Palette(
+    name        = "palette1",
+    description = "primary colors for white background",
+    colors      = [
+        "#fc0000",
+        "#ffae3a",
+        "#00ac00",
+        "#6665ec",
+        "#a9a9a9",
+    ]
+))
+palettes.append(Palette(
+    name        = "palette2",
+    description = "ATLAS clarity",
+    colors      = [
+                  "#FEFEFE",
+                  "#AACCFF",
+                  "#649800",
+                  "#9A33CC",
+                  "#EE2200",
+    ]
+))
+palettes.append(Palette(
+    name        = "palette3",
+    description = "ATLAS primary colors",
+    colors      = [
+                  "#005CFF",
+                  "#FFBF00",
+                  "#14B814",
+                  "#FF0000",
+                  "#00FFFF",
+    ]
+))
+palettes.append(Palette(
+    name        = "palette4",
+    description = "grayscale",
+    colors      = [
+                  "#E8E9EC",
+                  "#A7AEB6",
+                  "#6A747F",
+                  "#383D43",
+                  "#2A2C30",
+    ]
+))
+palettes.append(Palette(
+    name        = "palette5",
+    description = "dusk",
+    colors      = [
+                  "#F1E1BD",
+                  "#EEBA85",
+                  "#E18D76",
+                  "#9C837E",
+                  "#5B7887",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette6",
+    description = "sunset",
+    colors      = [
+                  "#ED4964",
+                  "#F69092",
+                  "#CC3075",
+                  "#5B217B",
+                  "#441D54",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette7",
+    description = "burnt",
+    colors      = [
+                  "#000000",
+                  "#472718",
+                  "#EB5656",
+                  "#ECA558",
+                  "#F2D773",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette8",
+    description = "high contrast",
+    colors      = [
+                  "#140E11",
+                  "#873387",
+                  "#41C6D7",
+                  "#ECD03E",
+                  "#FEEAC6",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette9",
+    description = "sequential blue green",
+    colors      = [
+                  "#f7fcfd",
+                  "#e5f5f9",
+                  "#ccece6",
+                  "#99d8c9",
+                  "#66c2a4",
+                  "#41ae76",
+                  "#238b45",
+                  "#006d2c",
+                  "#00441b",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette10",
+    description = "sequential blue purple",
+    colors      = [
+                  "#f7fcfd",
+                  "#e0ecf4",
+                  "#bfd3e6",
+                  "#9ebcda",
+                  "#8c96c6",
+                  "#8c6bb1",
+                  "#88419d",
+                  "#810f7c",
+                  "#4d004b",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette11",
+    description = "sequential green blue",
+    colors      = [
+                  "#f7fcf0",
+                  "#e0f3db",
+                  "#ccebc5",
+                  "#a8ddb5",
+                  "#7bccc4",
+                  "#4eb3d3",
+                  "#2b8cbe",
+                  "#0868ac",
+                  "#084081",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette12",
+    description = "sequential orange red",
+    colors      = [
+                  "#fff7ec",
+                  "#fee8c8",
+                  "#fdd49e",
+                  "#fdbb84",
+                  "#fc8d59",
+                  "#ef6548",
+                  "#d7301f",
+                  "#b30000",
+                  "#7f0000",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette13",
+    description = "sequential purple blue",
+    colors      = [
+                  "#fff7fb",
+                  "#ece7f2",
+                  "#d0d1e6",
+                  "#a6bddb",
+                  "#74a9cf",
+                  "#3690c0",
+                  "#0570b0",
+                  "#045a8d",
+                  "#023858",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette14",
+    description = "sequential purple blue green",
+    colors      = [
+                  "#fff7fb",
+                  "#ece2f0",
+                  "#d0d1e6",
+                  "#a6bddb",
+                  "#67a9cf",
+                  "#3690c0",
+                  "#02818a",
+                  "#016c59",
+                  "#014636",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette16",
+    description = "sequential purple red",
+    colors      = [
+                  "#f7f4f9",
+                  "#e7e1ef",
+                  "#d4b9da",
+                  "#c994c7",
+                  "#df65b0",
+                  "#e7298a",
+                  "#ce1256",
+                  "#980043",
+                  "#67001f",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette16",
+    description = "sequential red purple",
+    colors      = [
+                  "#fff7f3",
+                  "#fde0dd",
+                  "#fcc5c0",
+                  "#fa9fb5",
+                  "#f768a1",
+                  "#dd3497",
+                  "#ae017e",
+                  "#7a0177",
+                  "#49006a",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette17",
+    description = "sequential yellow green",
+    colors      = [
+                  "#ffffe5",
+                  "#f7fcb9",
+                  "#d9f0a3",
+                  "#addd8e",
+                  "#78c679",
+                  "#41ab5d",
+                  "#238443",
+                  "#006837",
+                  "#004529",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette18",
+    description = "sequential yellow green blue",
+    colors      = [
+                  "#ffffd9",
+                  "#edf8b1",
+                  "#c7e9b4",
+                  "#7fcdbb",
+                  "#41b6c4",
+                  "#1d91c0",
+                  "#225ea8",
+                  "#253494",
+                  "#081d58",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette19",
+    description = "yellow orange brown",
+    colors      = [
+                  "#ffffe5",
+                  "#fff7bc",
+                  "#fee391",
+                  "#fec44f",
+                  "#fe9929",
+                  "#ec7014",
+                  "#cc4c02",
+                  "#993404",
+                  "#662506",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette20",
+    description = "sequential yellow orange red",
+    colors      = [
+                  "#ffffcc",
+                  "#ffeda0",
+                  "#fed976",
+                  "#feb24c",
+                  "#fd8d3c",
+                  "#fc4e2a",
+                  "#e31a1c",
+                  "#bd0026",
+                  "#800026",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette21",
+    description = "qualitative Paired",
+    colors      = [
+                  "#a6cee3",
+                  "#1f78b4",
+                  "#b2df8a",
+                  "#33a02c",
+                  "#fb9a99",
+                  "#e31a1c",
+                  "#fdbf6f",
+                  "#ff7f00",
+                  "#cab2d6",
+                  "#6a3d9a",
+                  "#ffff99",
+                  "#b15928",
+                  ]
+))
+palettes.append(Palette(
+    name        = "palette22",
+    description = "qualitative Set3",
+    colors      = [
+                  "#8dd3c7",
+                  "#ffffb3",
+                  "#bebada",
+                  "#fb8072",
+                  "#80b1d3",
+                  "#fdb462",
+                  "#b3de69",
+                  "#fccde5",
+                  "#d9d9d9",
+                  "#bc80bd",
+                  "#ccebc5",
+                  "#ffed6f",
+                  ]
+))
 
 def save_images_of_palettes():
     for index, palette in enumerate(palettes):

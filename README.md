@@ -98,7 +98,21 @@ It can render and display tables of various specified widths and column widths w
 |---------------------------------------------------------------------------|
 ```
 
-It can provide color palettes, extend them and save images of them:
+It can provide color palettes, extend them and save images of them.
+
+# prerequisites
+
+## pyfiglet
+
+```Bash
+sudo pip install pyfiglet
+```
+
+# references
+
+- C. A. Brewer, M. Harrower ColorBrewer.org: An Online Tool for Selecting Colour Schemes for Maps, The Cartographic Journal, 40 (1), 27--37 (01 June 2003)
+
+# palettes
 
 ![](images/palette_1.png)
 ![](images/palette_2.png)
@@ -108,11 +122,17 @@ It can provide color palettes, extend them and save images of them:
 ![](images/palette_6.png)
 ![](images/palette_7.png)
 ![](images/palette_8.png)
-
-# prerequisites
-
-## pyfiglet
-
-```Bash
-sudo pip install pyfiglet
-```
+![](images/palette_9.png)
+![](images/palette_10.png)
+![](images/palette_11.png)
+![](images/palette_12.png)
+![](images/palette_13.png)
+![](images/palette_14.png)
+![](images/palette_15.png)
+![](images/palette_16.png)
+![](images/palette_17.png)
+![](images/palette_18.png)
+![](images/palette_19.png)
+![](images/palette_20.png)
+![](images/palette_21.png)
+![](images/palette_22.png)
