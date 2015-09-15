@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-09-08T1600Z"
+version = "2015-09-15T1528Z"
 
 import subprocess
 import textwrap
@@ -677,6 +677,14 @@ palettes.append(Palette(
 def save_images_of_palettes():
     for index, palette in enumerate(palettes):
         save_image_of_palette(
-            colors = palette,
+            colors   = palette,
             filename = "palette_{index}.png".format(index = index + 1)
         )
+
+def access_palette(
+    name = "palette1"
+    ):
+    for palette in palettes:
+        if palette.name() == name:
+            return palette
+    return None
