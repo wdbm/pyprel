@@ -98,7 +98,26 @@ It can render and display tables of various specified widths and column widths w
 |---------------------------------------------------------------------------|
 ```
 
-It can provide color palettes, extend them and save images of them.
+It can provide color palettes, extend them and save images of them. Color palettes available can be viewed by saving images of them:
+
+```Python
+pyprel.save_images_of_palettes()
+```
+
+A palette can be loaded using its name:
+
+```Python
+pyprel.access_palette(name = "palette1")
+```
+
+A palette of colors can be extended to a required number of colors:
+
+```Python
+colors1_extended = extend_palette(
+    colors = colors1,
+    minimumNumberOfColorsNeeded = 15
+)
+```
 
 # prerequisites
 
