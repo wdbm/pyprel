@@ -8,7 +8,7 @@
 #                                                                              #
 # This program provides elegant printing utilities in Python.                  #
 #                                                                              #
-# copyright (C) 2014 2015 William Breaden Madden                               #
+# copyright (C) 2014 William Breaden Madden                                    #
 #                                                                              #
 # This software is released under the terms of the GNU General Public License  #
 # version 3 (GPLv3).                                                           #
@@ -34,66 +34,69 @@
 #                                                                              #
 ################################################################################
 
-version = "2015-12-02T1252Z"
+version = "2016-01-12T1803Z"
 
 import subprocess
 import textwrap
 
 def smuggle(
-    moduleName = None,
-    URL        = None
+    module_name = None,
+    URL         = None
     ):
-    if moduleName is None:
-        moduleName = URL
+    if module_name is None:
+        module_name = URL
     try:
-        module = __import__(moduleName)
-        return(module)
+        module = __import__(module_name)
+        return module
     except:
         try:
-            moduleString = urllib.urlopen(URL).read()
+            module_string = urllib.urlopen(URL).read()
             module = imp.new_module("module")
-            exec moduleString in module.__dict__
-            return(module)
+            exec module_string in module.__dict__
+            return module
         except: 
             raise(
                 Exception(
-                    "module {moduleName} import error".format(
-                        moduleName = moduleName
+                    "module {module_name} import error".format(
+                        module_name = module_name
                     )
                 )
             )
             sys.exit()
 
-def terminalWidth():
-    return(
-        int(
-            subprocess.Popen(
-                ["tput", "cols"],
-                stdout = subprocess.PIPE
-            ).communicate()[0].decode("utf-8").strip("\n")
-        )
+def terminal_width():
+    return int(
+        subprocess.Popen(
+            ["tput", "cols"],
+            stdout = subprocess.PIPE
+        ).communicate()[0].decode("utf-8").strip("\n")
     )
 
-def centerString(
+def center_string(
     text = None
     ):
-    textList = text.splitlines()
-    _terminalWidth = terminalWidth()
-    newText = ""
-    for line in textList:
-        widthOfText = len(line)
-        paddingTotal = _terminalWidth - widthOfText
-        paddingLeft = int(paddingTotal/2)
-        paddingRight = paddingTotal - paddingLeft
-        newText = newText + paddingLeft * " " + line + paddingRight * " " + "\n"
-    return(newText)
+    text_list = text.splitlines()
+    _terminal_width = terminal_width()
+    new_text = ""
+    for line in text_list:
+        width_of_text = len(line)
+        padding_total = _terminal_width - width_of_text
+        padding_left  = int(padding_total / 2)
+        padding_right = padding_total - padding_left
+        new_text =\
+            new_text            +\
+            padding_left * " "  +\
+            line                +\
+            padding_right * " " +\
+            "\n"
+    return new_text
 
-def printCenter(
+def print_center(
     text = None
     ):
-    print(centerString(text = text))
+    print(center_string(text = text))
 
-def dictionaryString(
+def dictionary_string(
     dictionary  = None,
     indentation = ""
     ):
@@ -104,7 +107,7 @@ def dictionaryString(
                 indentation = indentation,
                 key         = key
             )
-            string += dictionaryString(
+            string += dictionary_string(
                 dictionary  = value,
                 indentation = indentation + "  "
             )
@@ -113,158 +116,158 @@ def dictionaryString(
                 key   = key,
                 value = value
             )
-    return(string)
+    return string
 
-def printDictionary(
+def print_dictionary(
     dictionary  = None,
     indentation = ""
     ):
-    print(dictionaryString(
+    print(dictionary_string(
         dictionary  = dictionary,
         indentation = ""
     ))
 
-def lineString(
+def line_string(
     character = "-"
     ):
-    _terminalWidth = terminalWidth()
+    _terminal_width = terminal_width()
     line = ""
-    for column in range(0, _terminalWidth):
+    for column in range(0, _terminal_width):
         line += character
-    return(line)
+    return line
 
-def printLine(
+def print_line(
     character = "-"
     ):
-    print(lineString(
+    print(line_string(
         character = character
     ))
 
-def renderBanner(
+def render_banner(
     text = None,
     font = "slant"
     ):
-    pyfiglet = smuggle(moduleName = "pyfiglet")
-    return(pyfiglet.Figlet(font = font).renderText(text))
+    pyfiglet = smuggle(module_name = "pyfiglet")
+    return pyfiglet.Figlet(font = font).renderText(text)
 
-def renderSegmentDisplay(
+def render_segment_display(
     text = None
     ):
     segments = (
         {
-            ' _ ': '02356789',
-            '   ': '14'
+            " _ ": "02356789",
+            "   ": "14"
         },
         {
-            '| |': '0',
-            '  |': '17',
-            ' _|': '23',
-            '|_|': '489',
-            '|_ ': '56'
+            "| |": "0",
+            "  |": "17",
+            " _|": "23",
+            "|_|": "489",
+            "|_ ": "56"
         },
         {
-            '|_|': '068',
-            '  |':'147',
-            '|_ ': '2',
-            ' _|':'359'
+            "|_|": "068",
+            "  |": "147",
+            "|_ ": "2",
+            " _|": "359"
         }
     )
-    segmentDisplayRender = ""
+    segment_display_render = ""
     for row in range(3):
         for character in text:
             for leds, digits in segments[row].items():
                 if character in digits:
-                    segmentDisplayRender = segmentDisplayRender + leds
-        segmentDisplayRender = segmentDisplayRender + "\n"
-    return(segmentDisplayRender)
+                    segment_display_render = segment_display_render + leds
+        segment_display_render = segment_display_render + "\n"
+    return segment_display_render
 
 class Table:
 
     def __init__(
         self,
-        contents                 = None,
-        columnWidth              = None,
-        tableWidthRequested      = None,
-        hardWrapping             = False,
-        columnDelimiter          = "|",
-        rowDelimiter             = "-"
+        contents                   = None,
+        column_width               = None,
+        table_width_requested      = None,
+        hard_wrapping              = False,
+        column_delimiter           = "|",
+        row_delimiter              = "-"
         ):
-        self.contents            = contents
-        self.columnWidth         = columnWidth
-        self.tableWidthRequested = tableWidthRequested
-        self.columnDelimiter     = columnDelimiter
-        self.hardWrapping        = hardWrapping
-        self.numberOfColumns = len(contents[0])
+        self.contents              = contents
+        self.column_width          = column_width
+        self.table_width_requested = table_width_requested
+        self.column_delimiter      = column_delimiter
+        self.hard_wrapping         = hard_wrapping
+        self.number_of_columns     = len(contents[0])
         # Resolve the table dimensions.
         # If a column width is specified, that is given precidence. If a table
         # width is requested, a reasonable column width is derived from it. If
         # no column width is specified and no table width is requested, the
         # requested table width is set to the terminal width.
-        if self.columnWidth is None:
-            if self.tableWidthRequested is None:
-                self.tableWidthRequested = terminalWidth()
-            self.columnWidth = (
-                self.tableWidthRequested -\
-                (self.numberOfColumns + 1) * len(self.columnDelimiter)
-            ) / self.numberOfColumns
+        if self.column_width is None:
+            if self.table_width_requested is None:
+                self.table_width_requested = terminal_width()
+            self.column_width = (
+                self.table_width_requested -\
+                (self.number_of_columns + 1) * len(self.column_delimiter)
+            ) / self.number_of_columns
         # line gets too long for one concatenation
-        self.rowDelimiter = self.columnDelimiter
-        self.rowDelimiter +=\
-            rowDelimiter * (
-                self.columnWidth * max([len(i) for i in self.contents]) +\
-                (self.numberOfColumns - 1) * len(self.columnDelimiter)
+        self.row_delimiter = self.column_delimiter
+        self.row_delimiter +=\
+            row_delimiter * (
+                self.column_width * max([len(i) for i in self.contents]) +\
+                (self.number_of_columns - 1) * len(self.column_delimiter)
             )
-        self.rowDelimiter +=\
-            self.columnDelimiter + "\n"
+        self.row_delimiter +=\
+            self.column_delimiter + "\n"
 
-    def wrapSoft(self):
+    def wrap_soft(self):
         # Wrap text regarding word boundaries.
-        tableString = self.rowDelimiter
+        table_string = self.row_delimiter
         # Restructure the table contents to get soft wrapped content for each
         # cell.
-        contentsWrapped = [
+        contents_wrapped = [
             [
-                textwrap.wrap(column, self.columnWidth) for column in row
+                textwrap.wrap(column, self.column_width) for column in row
             ] for row in self.contents
         ]
-        for row in contentsWrapped:
+        for row in contents_wrapped:
             for n in range(max([len(i) for i in row])):
-                tableString += self.columnDelimiter
+                table_string += self.column_delimiter
                 for column in row:
                     if n < len(column):
-                        tableString += column[n].ljust(self.columnWidth)
+                        table_string += column[n].ljust(self.column_width)
                     else:
-                        tableString += " " * self.columnWidth
-                    tableString += self.columnDelimiter
-                tableString += "\n"
-            tableString += self.rowDelimiter
-        return(tableString)
+                        table_string += " " * self.column_width
+                    table_string += self.column_delimiter
+                table_string += "\n"
+            table_string += self.row_delimiter
+        return table_string
 
-    def wrapHard(self):
+    def wrap_hard(self):
         # Wrap text disregarding word boundaries.
-        tableString = self.rowDelimiter
+        table_string = self.row_delimiter
         for row in self.contents:
-            maxWrap = (max([len(i) for i in row]) // self.columnWidth) + 1
-            for r in range(maxWrap):
-                tableString += self.columnDelimiter
+            max_wrap = (max([len(i) for i in row]) // self.column_width) + 1
+            for r in range(max_wrap):
+                table_string += self.column_delimiter
                 for column in row:
-                    start = r * self.columnWidth
-                    end = (r + 1) * self.columnWidth 
-                    tableString +=\
-                        column[start:end].ljust(self.columnWidth) +\
-                        self.columnDelimiter
-                tableString += "\n"
-            tableString += self.rowDelimiter
-        return(tableString)
+                    start = r * self.column_width
+                    end = (r + 1) * self.column_width
+                    table_string +=\
+                        column[start:end].ljust(self.column_width) +\
+                        self.column_delimiter
+                table_string += "\n"
+            table_string += self.row_delimiter
+        return table_string
 
     def __str__(self):
-        if self.hardWrapping is True:
-            return self.wrapHard()
+        if self.hard_wrapping is True:
+            return self.wrap_hard()
         else:
-            return self.wrapSoft()
+            return self.wrap_soft()
 
 def clamp(x): 
-    return(max(0, min(x, 255)))
+    return max(0, min(x, 255))
 
 def RGB_to_HEX(RGB_tuple):
     # This function returns a HEX string given an RGB tuple.
@@ -275,7 +278,7 @@ def RGB_to_HEX(RGB_tuple):
 
 def HEX_to_RGB(HEX_string):
     # This function returns an RGB tuple given a HEX string.
-    HEX = HEX_string.lstrip('#')
+    HEX = HEX_string.lstrip("#")
     HEX_length = len(HEX)
     return tuple(
         int(HEX[i:i + HEX_length // 3], 16) for i in range(
@@ -285,22 +288,22 @@ def HEX_to_RGB(HEX_string):
         )
     )
 
-def mean_color(colorsInHEX):
+def mean_color(colors_in_HEX):
     # This function returns a HEX string that represents the mean color of a
     # list of colors represented by HEX strings.
-    colorsInRGB = []
-    for colorInHEX in colorsInHEX:
-        colorsInRGB.append(HEX_to_RGB(colorInHEX))
+    colors_in_RGB = []
+    for color_in_HEX in colors_in_HEX:
+        colors_in_RGB.append(HEX_to_RGB(color_in_HEX))
     sum_r = 0
     sum_g = 0
     sum_b = 0
-    for colorInRGB in colorsInRGB:
-        sum_r += colorInRGB[0]
-        sum_g += colorInRGB[1]
-        sum_b += colorInRGB[2]
-    mean_r = sum_r / len(colorsInRGB)
-    mean_g = sum_g / len(colorsInRGB)
-    mean_b = sum_b / len(colorsInRGB)
+    for color_in_RGB in colors_in_RGB:
+        sum_r += color_in_RGB[0]
+        sum_g += color_in_RGB[1]
+        sum_b += color_in_RGB[2]
+    mean_r = sum_r / len(colors_in_RGB)
+    mean_g = sum_g / len(colors_in_RGB)
+    mean_b = sum_b / len(colors_in_RGB)
     return RGB_to_HEX((mean_r, mean_g, mean_b))
 
 class Palette(list):
@@ -341,9 +344,9 @@ class Palette(list):
 
 def extend_palette(
     colors = None, # list of HEX string colors
-    minimumNumberOfColorsNeeded = 15
+    minimum_number_of_colors_needed = 15
     ):
-    while len(colors) < minimumNumberOfColorsNeeded:
+    while len(colors) < minimum_number_of_colors_needed:
         for index in range(1, len(colors), 2):
             colors.insert(index, mean_color([colors[index - 1], colors[index]]))
     return colors
@@ -400,7 +403,7 @@ palettes.append(Palette(
                   "#14B814",
                   "#FF0000",
                   "#00FFFF",
-    ]
+                  ]
 ))
 palettes.append(Palette(
     name        = "palette4",
@@ -411,7 +414,7 @@ palettes.append(Palette(
                   "#6A747F",
                   "#383D43",
                   "#2A2C30",
-    ]
+                  ]
 ))
 palettes.append(Palette(
     name        = "palette5",

@@ -113,9 +113,9 @@ pyprel.access_palette(name = "palette1")
 A palette of colors can be extended to a required number of colors:
 
 ```Python
-colors1_extended = extend_palette(
-    colors = colors1,
-    minimumNumberOfColorsNeeded = 15
+colors_1_extended = extend_palette(
+    colors                          = colors_1,
+    minimum_number_of_colors_needed = 15
 )
 ```
 
