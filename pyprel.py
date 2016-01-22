@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-01-12T1803Z"
+version = "2016-01-22T1521Z"
 
 import subprocess
 import textwrap
@@ -341,6 +341,25 @@ class Palette(list):
         description = None
         ):
         self._description = description
+
+    def extend_palette(
+        self,
+        minimum_number_of_colors_needed = 15
+        ):
+        colors = self
+        while len(colors) < minimum_number_of_colors_needed:
+            for index in range(1, len(colors), 2):
+                colors.insert(index, mean_color([colors[index - 1], colors[index]]))
+        self = colors
+
+    def save_image_of_palette(
+        self,
+        filename = "palette.png"
+        ):
+        save_image_of_palette(
+            colors   = self,
+            filename = filename
+        )
 
 def extend_palette(
     colors = None, # list of HEX string colors
