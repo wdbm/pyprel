@@ -34,35 +34,36 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-01-22T1521Z"
+version = "2016-02-01T2018Z"
 
 import subprocess
 import textwrap
+import pyfiglet
 
-def smuggle(
-    module_name = None,
-    URL         = None
-    ):
-    if module_name is None:
-        module_name = URL
-    try:
-        module = __import__(module_name)
-        return module
-    except:
-        try:
-            module_string = urllib.urlopen(URL).read()
-            module = imp.new_module("module")
-            exec module_string in module.__dict__
-            return module
-        except: 
-            raise(
-                Exception(
-                    "module {module_name} import error".format(
-                        module_name = module_name
-                    )
-                )
-            )
-            sys.exit()
+#def smuggle(
+#    module_name = None,
+#    URL         = None
+#    ):
+#    if module_name is None:
+#        module_name = URL
+#    try:
+#        module = __import__(module_name)
+#        return module
+#    except:
+#        try:
+#            module_string = urllib.urlopen(URL).read()
+#            module = imp.new_module("module")
+#            exec module_string in module.__dict__
+#            return module
+#        except:
+#            raise(
+#                Exception(
+#                    "module {module_name} import error".format(
+#                        module_name = module_name
+#                    )
+#                )
+#            )
+#            sys.exit()
 
 def terminal_width():
     return int(
@@ -147,7 +148,7 @@ def render_banner(
     text = None,
     font = "slant"
     ):
-    pyfiglet = smuggle(module_name = "pyfiglet")
+    #pyfiglet = smuggle(module_name = "pyfiglet")
     return pyfiglet.Figlet(font = font).renderText(text)
 
 def render_segment_display(
@@ -346,11 +347,12 @@ class Palette(list):
         self,
         minimum_number_of_colors_needed = 15
         ):
-        colors = self
-        while len(colors) < minimum_number_of_colors_needed:
-            for index in range(1, len(colors), 2):
-                colors.insert(index, mean_color([colors[index - 1], colors[index]]))
-        self = colors
+        colors = extend_palette(
+            colors = self,
+            minimum_number_of_colors_needed = minimum_number_of_colors_needed
+        )
+        self.clear()
+        self.extend(colors)
 
     def save_image_of_palette(
         self,
@@ -361,13 +363,23 @@ class Palette(list):
             filename = filename
         )
 
+    def clear(
+        self
+        ):
+        for color in self:
+            self.remove(color)
+
 def extend_palette(
     colors = None, # list of HEX string colors
     minimum_number_of_colors_needed = 15
     ):
     while len(colors) < minimum_number_of_colors_needed:
-        for index in range(1, len(colors), 2):
-            colors.insert(index, mean_color([colors[index - 1], colors[index]]))
+        colors_extended = []
+        for index in range(1, len(colors)):
+            colors_extended.append(colors[index - 1])
+            colors_extended.append(mean_color([colors[index - 1], colors[index]]))
+        colors_extended.append(colors[-1])
+        colors = colors_extended
     return colors
 
 def save_image_of_palette(
