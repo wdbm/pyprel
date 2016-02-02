@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-02-01T2018Z"
+version = "2016-02-02T2217Z"
 
 import subprocess
 import textwrap
@@ -716,9 +716,15 @@ def save_images_of_palettes():
         )
 
 def access_palette(
-    name = "palette1"
+    name = "palette1",
+    minimum_number_of_colors_needed = None
     ):
     for palette in palettes:
         if palette.name() == name:
+            if minimum_number_of_colors_needed is not None and \
+            len(palette) < minimum_number_of_colors_needed:
+                palette.extend_palette(
+                    minimum_number_of_colors_needed = minimum_number_of_colors_needed
+                )
             return palette
     return None
