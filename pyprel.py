@@ -34,10 +34,11 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-02-02T2217Z"
+version = "2016-04-15T1228Z"
 
 import subprocess
 import textwrap
+
 import pyfiglet
 
 #def smuggle(
@@ -347,12 +348,13 @@ class Palette(list):
         self,
         minimum_number_of_colors_needed = 15
         ):
-        colors = extend_palette(
-            colors = self,
-            minimum_number_of_colors_needed = minimum_number_of_colors_needed
-        )
-        self.clear()
-        self.extend(colors)
+        if len(self) < minimum_number_of_colors_needed:
+            colors = extend_palette(
+                colors = self,
+                minimum_number_of_colors_needed = minimum_number_of_colors_needed
+            )
+            self.clear()
+            self.extend(colors)
 
     def save_image_of_palette(
         self,
