@@ -42,7 +42,7 @@ options:
 """
 
 name    = "examples_database"
-version = "2016-04-17T1902Z"
+version = "2016-04-17T1907Z"
 
 import docopt
 import os
@@ -101,10 +101,10 @@ database tables:\n{tables}
 \ntable {table} columns:\n{columns}
 \ntable {table} row one:\n{row}
 """.format(
-            tables = database.tables,
-            table  = name_table,
+            tables  = database.tables,
+            table   = name_table,
             columns = database[name_table].columns,
-            row = [entry for entry in table.find(id = "1")]
+            row     = [entry for entry in table.find(id = "1")]
         )
     )
 
