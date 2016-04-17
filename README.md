@@ -5,7 +5,6 @@ Python print elegant
 # setup
 
 ```Bash
-sudo pip install pyfiglet
 sudo pip install pyprel
 ```
 
