@@ -2,6 +2,13 @@
 
 Python print elegant
 
+# setup
+
+```Bash
+sudo pip install pyfiglet
+sudo pip install pyprel
+```
+
 # introduction
 
 This module provides Python rendering functionality. It can render a dictionary such that it is displayed with indentations for illustration of hierarchy:
@@ -117,14 +124,6 @@ colors_1_extended = extend_palette(
     colors                          = colors_1,
     minimum_number_of_colors_needed = 15
 )
-```
-
-# prerequisites
-
-## pyfiglet
-
-```Bash
-sudo pip install pyfiglet
 ```
 
 # references
