@@ -16,6 +16,9 @@ def main():
         author_email     = "w.bm@cern.ch",
         license          = "GPLv3",
         py_modules       = ["pyprel"],
+        install_requires = [
+            "pyfiglet",
+        ],
         entry_points     = """
             [console_scripts]
             pyprel = pyprel:pyprel
