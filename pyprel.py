@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-04-17T0850Z"
+version = "2016-04-17T1902Z"
 
 import subprocess
 import textwrap
@@ -267,6 +267,18 @@ class Table:
             return self.wrap_hard()
         else:
             return self.wrap_soft()
+
+def table_dataset_database_table(
+    table      = None
+    ):
+    columns = table.columns
+    table_contents = [columns]
+    for row in table:
+        row_contents = []
+        for column in columns:
+            row_contents.append(str(row[column]))
+        table_contents.append(row_contents)
+    return table_contents
 
 def clamp(x): 
     return max(0, min(x, 255))
