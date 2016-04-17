@@ -8,17 +8,19 @@ def main():
 
     setuptools.setup(
         name             = "pyprel",
-        version          = "2016.04.17.1902",
+        version          = "2016.04.17.2020",
         description      = "Python print elegant",
         long_description = Markdown_to_reStructuredText("README.md"),
         url              = "https://github.com/wdbm/pyprel",
         author           = "Will Breaden Madden",
         author_email     = "w.bm@cern.ch",
         license          = "GPLv3",
-        py_modules       = ["pyprel"],
+        py_modules       = [
+                           "pyprel"
+                           ],
         install_requires = [
-            "pyfiglet",
-        ],
+                           "pyfiglet",
+                           ],
         entry_points     = """
             [console_scripts]
             pyprel = pyprel:pyprel
