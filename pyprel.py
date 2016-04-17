@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-04-15T1228Z"
+version = "2016-04-17T0850Z"
 
 import subprocess
 import textwrap
@@ -409,66 +409,66 @@ palettes.append(Palette(
     name        = "palette1",
     description = "primary colors for white background",
     colors      = [
-        "#fc0000",
-        "#ffae3a",
-        "#00ac00",
-        "#6665ec",
-        "#a9a9a9",
+                  "#fc0000",
+                  "#ffae3a",
+                  "#00ac00",
+                  "#6665ec",
+                  "#a9a9a9",
     ]
 ))
 palettes.append(Palette(
     name        = "palette2",
     description = "ATLAS clarity",
     colors      = [
-                  "#FEFEFE",
-                  "#AACCFF",
+                  "#fefefe",
+                  "#aaccff",
                   "#649800",
-                  "#9A33CC",
-                  "#EE2200",
+                  "#9a33cc",
+                  "#ee2200",
     ]
 ))
 palettes.append(Palette(
     name        = "palette3",
     description = "ATLAS primary colors",
     colors      = [
-                  "#005CFF",
-                  "#FFBF00",
-                  "#14B814",
-                  "#FF0000",
-                  "#00FFFF",
+                  "#005cff",
+                  "#ffbf00",
+                  "#14b814",
+                  "#ff0000",
+                  "#00ffff",
                   ]
 ))
 palettes.append(Palette(
     name        = "palette4",
     description = "grayscale",
     colors      = [
-                  "#E8E9EC",
-                  "#A7AEB6",
-                  "#6A747F",
-                  "#383D43",
-                  "#2A2C30",
+                  "#e8e9ec",
+                  "#a7aeb6",
+                  "#6a747f",
+                  "#383d43",
+                  "#2a2c30",
                   ]
 ))
 palettes.append(Palette(
     name        = "palette5",
     description = "dusk",
     colors      = [
-                  "#F1E1BD",
-                  "#EEBA85",
-                  "#E18D76",
-                  "#9C837E",
-                  "#5B7887",
+                  "#f1e1bd",
+                  "#eeba85",
+                  "#e18d76",
+                  "#9c837e",
+                  "#5b7887",
                   ]
 ))
 palettes.append(Palette(
     name        = "palette6",
     description = "sunset",
     colors      = [
-                  "#ED4964",
-                  "#F69092",
-                  "#CC3075",
-                  "#5B217B",
-                  "#441D54",
+                  "#ed4964",
+                  "#f69092",
+                  "#cc3075",
+                  "#5b217b",
+                  "#441d54",
                   ]
 ))
 palettes.append(Palette(
@@ -477,20 +477,20 @@ palettes.append(Palette(
     colors      = [
                   "#000000",
                   "#472718",
-                  "#EB5656",
-                  "#ECA558",
-                  "#F2D773",
+                  "#eb5656",
+                  "#eca558",
+                  "#f2d773",
                   ]
 ))
 palettes.append(Palette(
     name        = "palette8",
     description = "high contrast",
     colors      = [
-                  "#140E11",
+                  "#140e11",
                   "#873387",
-                  "#41C6D7",
-                  "#ECD03E",
-                  "#FEEAC6",
+                  "#41c6d7",
+                  "#ecd03e",
+                  "#feeac6",
                   ]
 ))
 palettes.append(Palette(
