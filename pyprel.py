@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-04-17T2020Z"
+version = "2016-05-01T1648Z"
 
 import subprocess
 import textwrap
@@ -269,7 +269,7 @@ class Table:
             return self.wrap_soft()
 
 def table_dataset_database_table(
-    table      = None
+    table = None
     ):
     columns = table.columns
     table_contents = [columns]
@@ -278,6 +278,22 @@ def table_dataset_database_table(
         for column in columns:
             row_contents.append(str(row[column]))
         table_contents.append(row_contents)
+    return table_contents
+
+def table_Markdown_to_table_pyprel(
+    table = None # Markdown table string
+    ):
+    table_contents = []
+    for line in table.splitlines():
+        # If a line is not a heading delimiter or empty, access it.
+        if set(line) != set(["-", "|"]) and len(line) != 0:
+            # Split by column delimiters
+            line = line.split("|")
+            # Remove empty strings.
+            line = filter(None, line)
+            # Strip surrounding asterisks and whitespace.
+            line = [element.strip().strip("*") for element in line]
+            table_contents.append(line)
     return table_contents
 
 def clamp(x): 
