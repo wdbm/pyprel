@@ -42,7 +42,7 @@ options:
 """
 
 name    = "examples_database"
-version = "2016-04-17T1907Z"
+version = "2016-05-02T1222Z"
 
 import docopt
 import os
@@ -77,7 +77,11 @@ def main(options):
     print("access database {filename}".format(
         filename = filename_database
     ))
-    database = dataset.connect("sqlite:///database.db")
+    database = dataset.connect(
+        "sqlite:///{filename_database}".format(
+            filename_database = filename_database
+        )
+    )
     table = database[name_table]
 
     print("add data to database")

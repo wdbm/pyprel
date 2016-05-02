@@ -34,7 +34,7 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-05-01T1648Z"
+version = "2016-05-02T1229Z"
 
 import subprocess
 import textwrap
@@ -271,6 +271,10 @@ class Table:
 def table_dataset_database_table(
     table = None
     ):
+    """
+    Create a pyprel table contents list from a database table of the module
+    dataset.
+    """
     columns = table.columns
     table_contents = [columns]
     for row in table:
