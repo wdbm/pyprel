@@ -38,7 +38,7 @@
 
 #from __future__ import division
 
-version = "2016-06-02T1323Z"
+version = "2016-06-02T1344Z"
 
 import subprocess
 import textwrap
@@ -277,14 +277,15 @@ class Table:
 
 def table_dataset_database_table(
     table              = None,
+    include_attributes = None,
+    rows_limit         = None,
     print_progress     = False,
-    include_attributes = None
     ):
     """
     Create a pyprel table contents list from a database table of the module
     dataset. Attributes to be included in the table can be specified; by
-    default, all attributes are included. Progress on building the table can be
-    reported.
+    default, all attributes are included. A limit on the number of rows included
+    can be specified. Progress on building the table can be reported.
     """
 
     if print_progress:
@@ -299,12 +300,17 @@ def table_dataset_database_table(
         columns = table.columns
     table_contents = [columns]
     for index_row, row in enumerate(table):
-        if print_progress:
-            print(progress.add_datum(fraction = float(index_row) / float(number_of_rows)))
+        if rows_limit is not None:
+            if index_row >= rows_limit:
+                break
         row_contents = []
         for column in columns:
             row_contents.append(str(row[column]))
         table_contents.append(row_contents)
+        if print_progress:
+            print(progress.add_datum(
+                fraction = float(index_row) / float(number_of_rows))
+            )
 
     return table_contents
 
