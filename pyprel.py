@@ -36,7 +36,9 @@
 #                                                                              #
 ################################################################################
 
-version = "2016-05-11T1326Z"
+#from __future__ import division
+
+version = "2016-06-02T1323Z"
 
 import subprocess
 import textwrap
@@ -274,19 +276,36 @@ class Table:
             return self.wrap_soft()
 
 def table_dataset_database_table(
-    table = None
+    table              = None,
+    print_progress     = False,
+    include_attributes = None
     ):
     """
     Create a pyprel table contents list from a database table of the module
-    dataset.
+    dataset. Attributes to be included in the table can be specified; by
+    default, all attributes are included. Progress on building the table can be
+    reported.
     """
-    columns = table.columns
+
+    if print_progress:
+        import shijian
+        progress = shijian.Progress()
+        progress.engage_quick_calculation_mode()
+        number_of_rows = len(table)
+
+    if include_attributes:
+        columns = include_attributes
+    else:
+        columns = table.columns
     table_contents = [columns]
-    for row in table:
+    for index_row, row in enumerate(table):
+        if print_progress:
+            print(progress.add_datum(fraction = float(index_row) / float(number_of_rows)))
         row_contents = []
         for column in columns:
             row_contents.append(str(row[column]))
         table_contents.append(row_contents)
+
     return table_contents
 
 def table_Markdown_to_table_pyprel(
