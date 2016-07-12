@@ -38,37 +38,14 @@
 
 #from __future__ import division
 
-version = "2016-06-02T1344Z"
+name    = "pyprel"
+version = "2016-07-12T1553Z"
 
+import shijian
 import subprocess
 import textwrap
 
 import pyfiglet
-
-#def smuggle(
-#    module_name = None,
-#    URL         = None
-#    ):
-#    if module_name is None:
-#        module_name = URL
-#    try:
-#        module = __import__(module_name)
-#        return module
-#    except:
-#        try:
-#            module_string = urllib.urlopen(URL).read()
-#            module = imp.new_module("module")
-#            exec module_string in module.__dict__
-#            return module
-#        except:
-#            raise(
-#                Exception(
-#                    "module {module_name} import error".format(
-#                        module_name = module_name
-#                    )
-#                )
-#            )
-#            sys.exit()
 
 def terminal_width():
     return int(
@@ -207,6 +184,11 @@ class Table:
         self.column_delimiter      = column_delimiter
         self.hard_wrapping         = hard_wrapping
         self.number_of_columns     = len(contents[0])
+        # Convert all table contents to strings.
+        self.contents = shijian.convert_type_list_elements(
+            list_object  = self.contents,
+            element_type = str
+        )
         # Resolve the table dimensions.
         # If a column width is specified, that is given precidence. If a table
         # width is requested, a reasonable column width is derived from it. If

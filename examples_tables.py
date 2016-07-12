@@ -33,11 +33,15 @@
 """
 
 name    = "examples_tables"
-version = "2016-05-01T1648Z"
+version = "2016-07-12T1553Z"
 
 import pyprel
 
 def main():
+
+    pyprel.print_line()
+
+    print("\nconvert Markdown table to pyprel table\n")
 
     table_Markdown = """
 |**variable 1**|**variable 2**|
@@ -58,6 +62,32 @@ def main():
             contents = table_contents,
         )
     )
+
+    pyprel.print_line()
+
+    print("\ncompose and print table\n")
+    
+    table_contents = [
+        [
+            "number",
+            "letter"
+        ],
+        [
+            1,
+            "a"
+        ],
+        [
+            2,
+            "b"
+        ]
+    ]
+    print(
+        pyprel.Table(
+            contents = table_contents
+        )
+    )
+
+    pyprel.print_line()
 
 if __name__ == "__main__":
     main()
