@@ -127,7 +127,7 @@ colors_1_extended = extend_palette(
 
 # references
 
-- C. A. Brewer, M. Harrower ColorBrewer.org: An Online Tool for Selecting Colour Schemes for Maps, The Cartographic Journal, 40 (1), 27--37 (01 June 2003)
+- [C. A. Brewer, M. Harrower ColorBrewer.org: An Online Tool for Selecting Colour Schemes for Maps, The Cartographic Journal, 40 (1), 27--37 (01 June 2003)](http://www.albany.edu/faculty/fboscoe/papers/harrower2003.pdf)
 
 # palettes
 
