@@ -2,18 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import os
+
 import setuptools
 
 def main():
 
     setuptools.setup(
         name             = "pyprel",
-        version          = "2016.07.12.1553",
+        version          = "2017.01.16.1611",
         description      = "Python print elegant",
-        long_description = Markdown_to_reStructuredText("README.md"),
+        long_description = long_description(),
         url              = "https://github.com/wdbm/pyprel",
         author           = "Will Breaden Madden",
-        author_email     = "w.bm@cern.ch",
+        author_email     = "wbm@protonmail.ch",
         license          = "GPLv3",
         py_modules       = [
                            "pyprel"
@@ -28,17 +29,19 @@ def main():
         """
     )
 
-def read(*paths):
-    with open(os.path.join(*paths), "r") as filename:
-        return filename.read()
+def long_description(
+    filename = "README.md"
+    ):
 
-def Markdown_to_reStructuredText(filename):
-    try:
-        import pypandoc
-        return pypandoc.convert(filename, "rst")
-    except:
-        print("pypandoc not found; long description could be corrupted")
-        return read(filename)
+    if os.path.isfile(os.path.expandvars(filename)):
+        try:
+            import pypandoc
+            long_description = pypandoc.convert_file(filename, "rst")
+        except ImportError:
+            long_description = open(filename).read()
+    else:
+        long_description = ""
+    return long_description
 
 if __name__ == "__main__":
     main()

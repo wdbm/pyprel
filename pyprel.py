@@ -39,7 +39,7 @@
 #from __future__ import division
 
 name    = "pyprel"
-version = "2016-07-12T1553Z"
+version = "2017-01-16T1611Z"
 
 import shijian
 import subprocess
