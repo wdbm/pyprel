@@ -33,8 +33,9 @@
 """
 
 name    = "examples_tables"
-version = "2016-07-12T1553Z"
+version = "2017-01-26T2123Z"
 
+import numpy
 import pyprel
 
 def main():
@@ -86,6 +87,17 @@ def main():
             contents = table_contents
         )
     )
+
+    pyprel.print_line()
+
+    print("\ncompose and print a table using list comprehensions and zip\n")
+
+    data_x = numpy.linspace(0, numpy.pi, 10)
+    data_y = [numpy.sin(x) for x in data_x]
+
+    print(pyprel.Table(
+        contents = [["x", "y"]] + [[x, y] for x, y in zip(data_x, data_y)]
+    ))
 
     pyprel.print_line()
 
