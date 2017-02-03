@@ -39,7 +39,7 @@
 #from __future__ import division
 
 name    = "pyprel"
-version = "2017-01-16T1611Z"
+version = "2017-02-03T1614Z"
 
 import shijian
 import subprocess
@@ -58,15 +58,15 @@ def terminal_width():
 def center_string(
     text = None
     ):
-    text_list = text.splitlines()
+    text_list       = text.splitlines()
     _terminal_width = terminal_width()
-    new_text = ""
+    new_text        = ""
     for line in text_list:
         width_of_text = len(line)
         padding_total = _terminal_width - width_of_text
         padding_left  = int(padding_total / 2)
         padding_right = padding_total - padding_left
-        new_text =\
+        new_text                =\
             new_text            +\
             padding_left * " "  +\
             line                +\
@@ -287,7 +287,11 @@ def table_dataset_database_table(
                 break
         row_contents = []
         for column in columns:
-            row_contents.append(str(row[column]))
+            try:
+                string_representation = str(row[column])
+            except:
+                string_representation = str(row[column].encode("utf-8"))
+            row_contents.append(string_representation)
         table_contents.append(row_contents)
         if print_progress:
             print(progress.add_datum(

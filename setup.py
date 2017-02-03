@@ -9,7 +9,7 @@ def main():
 
     setuptools.setup(
         name             = "pyprel",
-        version          = "2017.01.16.1611",
+        version          = "2017.02.03.1614",
         description      = "Python print elegant",
         long_description = long_description(),
         url              = "https://github.com/wdbm/pyprel",
