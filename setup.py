@@ -9,7 +9,7 @@ def main():
 
     setuptools.setup(
         name             = "pyprel",
-        version          = "2017.02.03.1614",
+        version          = "2017.02.16.1353",
         description      = "Python print elegant",
         long_description = long_description(),
         url              = "https://github.com/wdbm/pyprel",
@@ -20,6 +20,8 @@ def main():
                            "pyprel"
                            ],
         install_requires = [
+                           "Image",
+                           "numpy",
                            "pyfiglet",
                            "shijian"
                            ],

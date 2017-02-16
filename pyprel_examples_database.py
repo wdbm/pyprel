@@ -3,7 +3,7 @@
 """
 ################################################################################
 #                                                                              #
-# examples_database                                                            #
+# pyprel_examples_database                                                     #
 #                                                                              #
 ################################################################################
 #                                                                              #
@@ -41,8 +41,8 @@ options:
     --table=NAME     database table name [default: users]
 """
 
-name    = "examples_database"
-version = "2016-05-02T1222Z"
+name    = "pyprel_examples_database"
+version = "2017-02-16T1356Z"
 
 import docopt
 import os

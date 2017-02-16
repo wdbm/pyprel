@@ -39,13 +39,13 @@
 #from __future__ import division
 
 name    = "pyprel"
-version = "2017-02-03T1614Z"
+version = "2017-02-16T1353Z"
 
-import shijian
 import subprocess
 import textwrap
 
 import pyfiglet
+import shijian
 
 def terminal_width():
     return int(
