@@ -41,11 +41,13 @@
 from __future__ import division
 
 name    = "pyprel"
-version = "2018-01-08T2203Z"
+version = "2018-01-08T2317Z"
 
 import subprocess
 import textwrap
 
+import numpy
+import PIL.Image
 import pyfiglet
 import shijian
 
@@ -440,8 +442,6 @@ def save_image_of_palette(
     colors   = None, # list of HEX string colors
     filename = "palette.png"
     ):
-    import numpy
-    import Image
     scale_x = 200
     scale_y = 124
     data = numpy.zeros((1, len(colors), 3), dtype = numpy.uint8)
@@ -452,7 +452,7 @@ def save_image_of_palette(
         data[0, index] = [color_RGB[0], color_RGB[1], color_RGB[2]]
     data = numpy.repeat(data, scale_x, axis=0)
     data = numpy.repeat(data, scale_y, axis=1)
-    image = Image.fromarray(data)
+    image = PIL.Image.fromarray(data)
     image.save(filename)
 
 # Define color palettes.
