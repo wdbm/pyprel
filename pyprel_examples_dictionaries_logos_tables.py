@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+import sys
+
 import pyprel
 
 def main():
 
     print("\nexample: printout of dictionary")
-    raw_input("Press Enter to continue.")
+    get_input("Press Enter to continue.")
 
     information = {
         "sample information": {
@@ -29,7 +31,7 @@ def main():
     pyprel.print_line()
 
     print("\nexample: printout of existing logo")
-    raw_input("Press Enter to continue.")
+    get_input("Press Enter to continue.")
 
     text = (
     "   ____      _            _____ _                \n"
@@ -42,7 +44,7 @@ def main():
     pyprel.print_center(text = text)
 
     print("\nexample: rendering and printout of logo")
-    raw_input("Press Enter to continue.")
+    get_input("Press Enter to continue.")
 
     name = "aria"
     logo = pyprel.render_banner(
@@ -53,12 +55,12 @@ def main():
     pyprel.print_line()
 
     print("\nexample: rendering and printout segment display")
-    raw_input("Press Enter to continue.")
+    get_input("Press Enter to continue.")
 
     print(pyprel.render_segment_display(text = "0123456789"))
 
     print("\nexample: printout of tables")
-    raw_input("Press Enter to continue.")
+    get_input("Press Enter to continue.")
 
     table_contents = [
         ["heading 1", "heading 2"],
@@ -156,6 +158,15 @@ def main():
             contents = table_contents
         )
     )
+
+def get_input(
+    prompt = None
+    ):
+    if sys.version_info >= (3, 0):
+        return input(prompt)
+    else:
+        return raw_input(prompt)
+
 
 if __name__ == '__main__':
     main()

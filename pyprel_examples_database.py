@@ -51,16 +51,6 @@ import uuid
 import dataset
 import pyprel
 
-def create_database(
-    filename = None
-    ):
-
-    os.system(
-        "sqlite3 " + \
-        filename   + \
-        " \"create table aTable(field1 int); drop table aTable;\""
-    )
-
 def main(options):
 
     filename_database = options["--database"]
@@ -122,6 +112,15 @@ database tables:\n{tables}
                 table = database[name_table]
             )
         )
+    )
+
+def create_database(
+    filename = None
+    ):
+    os.system(
+        "sqlite3 " + \
+        filename   + \
+        " \"create table aTable(field1 int); drop table aTable;\""
     )
 
 if __name__ == "__main__":

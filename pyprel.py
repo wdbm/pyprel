@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""
 ################################################################################
 #                                                                              #
 # pyprel                                                                       #
@@ -35,11 +36,12 @@
 #   (01 June 2003)                                                             #
 #                                                                              #
 ################################################################################
+"""
 
-#from __future__ import division
+from __future__ import division
 
 name    = "pyprel"
-version = "2017-02-16T1353Z"
+version = "2018-01-08T2203Z"
 
 import subprocess
 import textwrap
@@ -84,7 +86,7 @@ def dictionary_string(
     indentation = ""
     ):
     string = ""
-    for key, value in dictionary.iteritems():
+    for key, value in list(dictionary.items()):
         if isinstance(value, dict):
             string += "\n{indentation}{key}:".format(
                 indentation = indentation,
@@ -161,13 +163,13 @@ def render_segment_display(
     segment_display_render = ""
     for row in range(3):
         for character in text:
-            for leds, digits in segments[row].items():
+            for leds, digits in list(segments[row].items()):
                 if character in digits:
                     segment_display_render = segment_display_render + leds
         segment_display_render = segment_display_render + "\n"
     return segment_display_render
 
-class Table:
+class Table(object):
 
     def __init__(
         self,
@@ -205,7 +207,7 @@ class Table:
         self.row_delimiter = self.column_delimiter
         self.row_delimiter +=\
             row_delimiter * (
-                self.column_width * max([len(i) for i in self.contents]) +\
+                int(self.column_width) * max([len(i) for i in self.contents]) +\
                 (self.number_of_columns - 1) * len(self.column_delimiter)
             )
         self.row_delimiter +=\
@@ -218,7 +220,7 @@ class Table:
         # cell.
         contents_wrapped = [
             [
-                textwrap.wrap(column, self.column_width) for column in row
+                textwrap.wrap(column, int(self.column_width)) for column in row
             ] for row in self.contents
         ]
         for row in contents_wrapped:
@@ -226,9 +228,9 @@ class Table:
                 table_string += self.column_delimiter
                 for column in row:
                     if n < len(column):
-                        table_string += column[n].ljust(self.column_width)
+                        table_string += column[n].ljust(int(self.column_width))
                     else:
-                        table_string += " " * self.column_width
+                        table_string += " " * int(self.column_width)
                     table_string += self.column_delimiter
                 table_string += "\n"
             table_string += self.row_delimiter
@@ -238,14 +240,14 @@ class Table:
         # Wrap text disregarding word boundaries.
         table_string = self.row_delimiter
         for row in self.contents:
-            max_wrap = (max([len(i) for i in row]) // self.column_width) + 1
+            max_wrap = int((max([len(i) for i in row]) // self.column_width) + 1)
             for r in range(max_wrap):
                 table_string += self.column_delimiter
                 for column in row:
-                    start = r * self.column_width
-                    end = (r + 1) * self.column_width
+                    start = r * int(self.column_width)
+                    end   = (r + 1) * int(self.column_width)
                     table_string +=\
-                        column[start:end].ljust(self.column_width) +\
+                        column[start:end].ljust(int(self.column_width)) +\
                         self.column_delimiter
                 table_string += "\n"
             table_string += self.row_delimiter
@@ -263,6 +265,7 @@ def table_dataset_database_table(
     rows_limit         = None,
     print_progress     = False,
     ):
+
     """
     Create a pyprel table contents list from a database table of the module
     dataset. Attributes to be included in the table can be specified; by
@@ -310,7 +313,8 @@ def table_Markdown_to_table_pyprel(
             # Split by column delimiters
             line = line.split("|")
             # Remove empty strings.
-            line = filter(None, line)
+            #line = filter(None, line)
+            line = [_f for _f in line if _f]
             # Strip surrounding asterisks and whitespace.
             line = [element.strip().strip("*") for element in line]
             table_contents.append(line)
@@ -324,7 +328,7 @@ def RGB_to_HEX(RGB_tuple):
     r = RGB_tuple[0]
     g = RGB_tuple[1]
     b = RGB_tuple[2]
-    return "#{0:02x}{1:02x}{2:02x}".format(clamp(r), clamp(g), clamp(b))
+    return "#{0:02x}{1:02x}{2:02x}".format(int(clamp(r)), int(clamp(g)), int(clamp(b)))
 
 def HEX_to_RGB(HEX_string):
     # This function returns an RGB tuple given a HEX string.

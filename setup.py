@@ -9,7 +9,7 @@ def main():
 
     setuptools.setup(
         name             = "pyprel",
-        version          = "2017.02.16.1353",
+        version          = "2018.01.08.2203",
         description      = "Python print elegant",
         long_description = long_description(),
         url              = "https://github.com/wdbm/pyprel",
@@ -26,9 +26,9 @@ def main():
                            "shijian"
                            ],
         entry_points     = """
-            [console_scripts]
-            pyprel = pyprel:pyprel
-        """
+                           [console_scripts]
+                           pyprel = pyprel:pyprel
+                           """
     )
 
 def long_description(
