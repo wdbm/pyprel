@@ -39,17 +39,17 @@
 """
 
 from __future__ import division
-
-name    = "pyprel"
-version = "2018-01-08T2317Z"
-
 import subprocess
 import textwrap
 
 import numpy
+import pandas as pd
 import PIL.Image
 import pyfiglet
 import shijian
+
+name    = "pyprel"
+version = "2018-01-20T2116Z"
 
 def terminal_width():
     return int(
@@ -303,6 +303,14 @@ def table_dataset_database_table(
                 fraction = float(index_row) / float(number_of_rows))
             )
 
+    return table_contents
+
+def table_DataFrame(
+    df = None
+    ):
+    table_contents = [df.columns.tolist()]
+    for index, row in df.iterrows():
+        table_contents.append([row[column] for column in df.columns])
     return table_contents
 
 def table_Markdown_to_table_pyprel(
