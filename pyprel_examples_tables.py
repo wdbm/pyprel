@@ -33,7 +33,7 @@
 """
 
 name    = "examples_tables"
-version = "2017-01-26T2123Z"
+version = "2018-09-06T1743Z"
 
 import numpy
 import pyprel
@@ -97,6 +97,34 @@ def main():
 
     print(pyprel.Table(
         contents = [["x", "y"]] + [[x, y] for x, y in zip(data_x, data_y)]
+    ))
+
+    pyprel.print_line()
+
+    print("\ncompose aligned printouts of data using tables\n")
+
+    table_contents = [
+        ["msg:"      , "1536155474294"],
+        ["signature:", "0C118313F6D19"],
+        ["data:"     , "1536155474294"]
+    ]
+    print(pyprel.Table(
+        contents              = table_contents,
+        column_delimiter      = "",
+        row_delimiter         = "",
+        table_width_requested = 40
+    ))
+
+    table_contents = [
+        ["msg:"      , "15361554742941536155474294153615547429415361554742941536155474294"],
+        ["signature:", "0C118313F6D190C118313F6D190C118313F6D190C118313F6D190C118313F6D19"],
+        ["data:"     , "15361554742941536155474294153615547429415361554742941536155474294"]
+    ]
+    print(pyprel.Table(
+        contents              = table_contents,
+        column_delimiter      = "",
+        row_delimiter         = "",
+        table_width_requested = 40
     ))
 
     pyprel.print_line()
