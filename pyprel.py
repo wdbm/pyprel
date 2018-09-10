@@ -49,7 +49,7 @@ import pyfiglet
 import shijian
 
 name    = "pyprel"
-version = "2018-09-10T1716Z"
+version = "2018-09-10T1739Z"
 
 def terminal_height():
     return int(
