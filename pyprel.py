@@ -49,7 +49,15 @@ import pyfiglet
 import shijian
 
 name    = "pyprel"
-version = "2018-01-20T2116Z"
+version = "2018-09-10T1716Z"
+
+def terminal_height():
+    return int(
+        subprocess.Popen(
+            ["tput", "lines"],
+            stdout = subprocess.PIPE
+        ).communicate()[0].decode("utf-8").strip("\n")
+    )
 
 def terminal_width():
     return int(
@@ -58,6 +66,9 @@ def terminal_width():
             stdout = subprocess.PIPE
         ).communicate()[0].decode("utf-8").strip("\n")
     )
+
+def terminal_dimensions():
+    return (terminal_width(), terminal_height())
 
 def center_string(
     text = None
