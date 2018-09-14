@@ -5,7 +5,7 @@ Python print elegant
 # setup
 
 ```Bash
-sudo pip install pyprel
+pip install pyprel
 ```
 
 # introduction
